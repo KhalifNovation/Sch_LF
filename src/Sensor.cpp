@@ -26,6 +26,10 @@ void Sensor::begin(){
 	init_LS();
 }
 
+void Sensor::calibration() {
+
+}
+
 bool Sensor::isBTN_press() {
 	return !digitalRead(BTN);
 }

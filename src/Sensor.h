@@ -17,6 +17,8 @@ class Sensor
 {
 public:
 	void begin();
+	void calibration();
+
 
 	bool isBTN_press();
 	bool isJMP_connected();	
