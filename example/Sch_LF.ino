@@ -31,13 +31,16 @@
 Motor robot;
 Sensor input;
 
+// constant for serial 
+#define debugMode false
+#define serialMode true
+#define baudrate 9600
+
 
 void setup()
 {
-	Serial.begin(9600); //set Serial Baudrate to 9600
-	robot.begin();		//initialize output (Motor)
-	input.begin();		//initialize input (Button,Jumper,IR Sensor)
-	init_BUZZ();		//initialize buzzer
+    init_Serial();      //initialize serial
+    init_Hardware();    //initialize robot hardware
 }
 
 void loop()
@@ -70,5 +73,27 @@ void loop()
 	delay(1000);
 	BUZZ_OFF();								//Turn off buzzer
 	delay(1000);
+
+}
+
+// initialize Serial
+void init_Serial(){
+    
+    // check if user serial or debug mode
+    if(debugMode || serialMode){
+
+        // Additional serial setup can be add here
+        Serial.begin(baudrate);
+
+    }
+
+}
+
+// initialize Robot Hardware
+void init_Hardware(){
+
+ 	robot.begin();		//initialize output (Motor)
+	input.begin();		//initialize input (Button,Jumper,IR Sensor)
+	init_BUZZ();		//initialize buzzer   
 
 }
