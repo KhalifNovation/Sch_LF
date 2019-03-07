@@ -4,7 +4,7 @@ Getting started easier in basic robotic for primary and high school. This is a g
 ## HARDWARE
 
 |Hardware|Arduino Pin |Code Label |I/O   |
-|--------|:----------:|:---------:|:----:|
+|--------|:----------:|:---------|:----|
 |BUZZER  |D6          |BUZZ       |OUTPUT|
 |A1      |D7          |DIR_A1     |OUTPUT|
 |A2      |D8          |DIR_A2     |OUTPUT|
