@@ -7,6 +7,14 @@
 #include "WProgram.h"
 #endif
 
+//Serial setup
+
+#define debugMode false
+#define serialMode true
+#define baudrate 9600
+
+#define init_Serial()
+
 //Sensor Hardware Setting (Pin's number)
 
 #define BTN		3
