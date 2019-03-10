@@ -33,6 +33,14 @@ void Motor::right(int speed) {
 	motor_right(-speed);
 }
 
+void Motor::drive(double heading,int speed, int gain) {
+	int Lspeed = speed + (heading * gain);
+	int Rspeed = speed - (heading * gain);
+	
+	motor_left(Lspeed);
+	motor_right(Rspeed);
+}
+
 void Motor::motor_left(int speed) {
 	speed = constrain(speed, -255, 255);
 
