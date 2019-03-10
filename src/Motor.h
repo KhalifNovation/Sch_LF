@@ -20,6 +20,8 @@ public:
 	void left(int speed);
 	void right(int speed);
 	
+	void drive(double heading,int speed, int gain);
+
 	void motor_left(int speed);
 	void motor_right(int speed);
 
