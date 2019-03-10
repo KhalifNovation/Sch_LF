@@ -11,23 +11,52 @@
 	#include "WProgram.h"
 #endif
 
+enum DataName {
+	PIN,
+	STATE,
+	LAST_STATE,
+	VAL,
+	HIGH_VAL,
+	LOW_VAL,
+	THRESSHOLD
+};
 
+struct SensorData
+{
+	int Pin;
+	bool State = false;
+	bool LastState = false;
+	int Val;
+	int HighVal;
+	int LowVal;
+	int ThressHold;
+	
+};
 
 class Sensor
 {
 public:
-	void begin();
-	void calibration();
+	SensorData AN[7];
 
+private:
+
+
+public:
+	void begin();
+	void calibration(int cycle = 30);
 
 	bool isBTN_press();
 	bool isJMP_connected();	
 	bool isLS_detected(int ch);
 	
+	int getIntData(DataName dname,int ch);
+	bool getBoolData(DataName dname, int ch);
+	
 	int LS_RAW(int ch);
+
 	
 private:
-
+	
 };
 
 
