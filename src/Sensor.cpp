@@ -24,23 +24,24 @@ int channel[] = {
 
 void Sensor::begin(){
 	init_LS();
-	for (int i = 0; i < 7; i++) {
+	for (int i = 0; i < NUM_SENSORS; i++) {
 		AN[i].Pin = channel[i];
 	}
 }
 
 void Sensor::calibration(int cycle = 30) {
-	int _val[7];
-	int	_pin[7];
-	int	_highval[7];
-	int	_lowval[7];
-	for (int i = 0; i < 7; i++) {
+	int _val[ NUM_SENSORS ];
+	int	_pin[ NUM_SENSORS ];
+	int	_highval[ NUM_SENSORS ];
+	int	_lowval[ NUM_SENSORS ];
+
+	for (int i = 0; i < NUM_SENSORS; i++) {
 		_val[i] = AN[i].Val;
 		_pin[i] = AN[i].Pin;
 	}
 
 	for (int n = 0; n < cycle; n++) {
-		for (int i = 0; i < 7; i++) {
+		for (int i = 0; i < NUM_SENSORS; i++) {
 			_val[i] = analogRead(_pin[i]);
 
 			if (_val[i] < _highval[i]) {
@@ -57,7 +58,7 @@ void Sensor::calibration(int cycle = 30) {
 
 
 
-	for (int i = 0; i < 7; i++) {
+	for (int i = 0; i < NUM_SENSORS; i++) {
 		int thress = _highval[i] - _lowval[i];
 		thress /= 2;
 
