@@ -11,6 +11,8 @@
 	#include "WProgram.h"
 #endif
 
+#define NUM_SENSORS		7
+
 enum DataName {
 	PIN,
 	STATE,
@@ -36,7 +38,7 @@ struct SensorData
 class Sensor
 {
 public:
-	SensorData AN[7];
+	SensorData AN[ NUM_SENSORS ];
 
 private:
 
