@@ -1,4 +1,4 @@
 **/example/__vm
 **/example/.vs
 **/VisualStudio/**
-*.vscode/
+*.vscode
