@@ -74,7 +74,7 @@ void Sensor::calibration(int cycle = 30) {
 /*
 * @brief	Get the average of N-X ADC samples
 *
-* @param	calType, calibration type either HIGH or LOW_VAL
+* @param	calType, environment/line calibration type
 * @return	calibration status
 **/
 CalStatus Sensor::calibrateSensor( CalType calType )
