@@ -101,8 +101,6 @@ CalStatus Sensor::calibrateSensor( CalType calType )
 * @brief	Get the average of N-X ADC samples
 *
 * @param	sensorCh, sensor channel number
-* @param	N, number of ADC samples to be averaged
-* @param	X, number of ADC samples to be deleted
 * @return	avg_sample, sensor channel average value
 **/
 uint16_t Sensor::analogSampleNX( uint8_t sensorCh )
