@@ -65,13 +65,14 @@ class Sensor
 		CalStatus calibrateSensor( CalType calType );
 
 		bool isBTN_press();
-		bool isJMP_connected();	
-		bool isLS_detected(int ch);
+		bool isJMP_connected();
+		bool isLS_detected( uint8_t ch );
 		
 		uint16_t getIntData( DataName dname, uint8_t ch );
 		bool getBoolData( DataName dname, uint8_t ch );
 		
 		uint16_t LS_RAW( uint8_t ch );
+		uint16_t LS_ScanBinary( void );
 
 	private:
 		uint16_t analogSampleNX( uint8_t sensorCh );
