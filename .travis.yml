@@ -1,0 +1,24 @@
+language: c
+sudo: false
+cache:
+  directories:
+    - ~/arduino_ide
+    - ~/.arduino15/packages/
+git:
+  depth: false
+  quiet: true
+env:
+  global:
+      - ARDUINO_IDE_VERSION="1.8.7"
+      - PRETTYNAME="Sch_LF Arduino Library"
+  
+before_install:
+    - source $TRAVIS_BUILD_DIR/install.sh
+    
+script:
+    - build_platform uno
+  
+# Generate and deploy documentation
+# after_success:
+#   - source <(curl -SLs  https://github.com/KhalifNovation/Sch_LF/master/library_check.sh)
+#   - source <(curl -SLs  https://github.com/KhalifNovation/Sch_LF/master/doxy_gen_and_deploy.sh)
