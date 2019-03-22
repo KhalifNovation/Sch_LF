@@ -10,9 +10,9 @@ Use this strategy for developing features or bugfix in this project repository.
 | Develop        | NO        | master      | The latest state of development (unstable)                                                                 |
 | release-vX.Y.Z | NO        | Develop     | A temporary release branch for versioning                                                                  |
 | master         | YES       | N/A         | What is live in production (stable)<br> A PR (Pull Request) is required to merge the code into master      |
-| feature        | NO        | Develop     | Features development work                                                                                  |
-| hotfix         | YES       | master      | Hotfix for live production (fast action)<br> A PR (Pull Request) is required to merge the code into master |
-| bugfix         | NO        | Develop     | Bugfix for Development code                                                                                |
+| feature/your-feature-name        | NO        | Develop     | Features development work                                                                                  |
+| hotfix/your-fix-name         | YES       | master      | Hotfix for live production (fast action)<br> A PR (Pull Request) is required to merge the code into master |
+| bugfix/your-bug-name         | NO        | Develop     | Bugfix for Development code                                                                                |
 
 
 ## Use Cases
