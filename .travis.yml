@@ -13,7 +13,7 @@ env:
       - PRETTYNAME="Sch_LF Arduino Library"
   
 before_install:
-    - source <(curl -SLs https://github.com/KhalifNovation/Sch_LF/master/install.sh)
+    - source <(curl -SLs https://github.com/KhalifNovation/Sch_LF/blob/create-branching-strategy-readme/install.sh)
     
 script:
     - build_main_platforms
