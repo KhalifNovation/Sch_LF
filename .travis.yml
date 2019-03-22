@@ -9,14 +9,18 @@ git:
   quiet: true
 env:
   global:
-      - ARDUINO_IDE_VERSION="1.8.8"
+      - ARDUINO_IDE_VERSION="1.8.7"
       - PRETTYNAME="Sch_LF Arduino Library"
   
 before_install:
-    - source <(curl -SLs https://raw.githubusercontent.com/KhalifNovation/Sch_LF/create-branching-strategy-readme/install.sh)
+    - source $TRAVIS_BUILD_DIR/install.sh
     
 script:
-    - build_main_platforms
+    - build_platform esp32
+    - build_platform uno
+    - build_platform leonardo
+    - build_platform zero
+    - build_platform esp8266
   
 # Generate and deploy documentation
 # after_success:

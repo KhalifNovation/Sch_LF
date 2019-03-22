@@ -37,7 +37,7 @@ echo "########################################################################";
 
 # if .travis.yml does not set version
 if [ -z $ARDUINO_IDE_VERSION ]; then
-export ARDUINO_IDE_VERSION="1.8.8"
+export ARDUINO_IDE_VERSION="1.8.7"
 echo "NOTE: YOUR .TRAVIS.YML DOES NOT SPECIFY ARDUINO IDE VERSION, USING $ARDUINO_IDE_VERSION"
 fi
 
@@ -68,7 +68,7 @@ echo -e """$GREEN""\xe2\x9c\x93"
 fi
 
 # link test library folder to the arduino libraries folder
-ln -s $TRAVIS_BUILD_DIR $HOME/arduino_ide/libraries/Adafruit_Test_Library
+ln -s $TRAVIS_BUILD_DIR $HOME/arduino_ide/libraries/Sch_LF
 
 # add the arduino CLI to our PATH
 export PATH="$HOME/arduino_ide:$PATH"
