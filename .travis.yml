@@ -16,11 +16,7 @@ before_install:
     - source $TRAVIS_BUILD_DIR/install.sh
     
 script:
-    - build_platform esp32
     - build_platform uno
-    - build_platform leonardo
-    - build_platform zero
-    - build_platform esp8266
   
 # Generate and deploy documentation
 # after_success:
