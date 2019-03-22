@@ -170,14 +170,35 @@ bool Sensor::isJMP_connected()
 	return (!digitalRead( JMP ) == 0 ? true : false );
 }
 
-bool Sensor::isLS_detected(int ch)
+/**
+ * @brief	Check sensor channel detection on LINE area
+ * 
+ * @param	ch, sensor channel
+ * @return	bool, sensor detection status
+*/
+bool Sensor::isLS_detected( uint8_t ch )
 {
-	return digitalRead(AN[ch].Pin);
+	uint16_t sensorVal;
+	uint16_t tolerance = 10u;
+
+	// Get averaged sensor value
+	sensorVal = analogSampleNX( ch );
+
+	// Compare to sensor value within LINE value range
+	if( sensorVal <= (AN[ch].LineVal + tolerance) && 
+		sensorVal >= (AN[ch].LineVal - tolerance) )
+	{
+		return true;
+	}
+	else
+	{
+		return false;
+	}
 }
 
 uint16_t Sensor::getIntData( DataName dname, uint8_t ch )
 {
-	uint16_t val;
+	uint16_t val = 0u;
 	switch( dname )
 	{
 		case PIN:
@@ -198,6 +219,8 @@ uint16_t Sensor::getIntData( DataName dname, uint8_t ch )
 		case THRESSHOLD:
 			val = AN[ch].ThressHold;
 			break;
+		default:
+		break;
 	}
 
 	return val;
@@ -205,7 +228,7 @@ uint16_t Sensor::getIntData( DataName dname, uint8_t ch )
 
 bool Sensor::getBoolData( DataName dname, uint8_t ch )
 {
-	bool val;
+	bool val = false;
 	switch( dname )
 	{
 		case STATE:
@@ -214,6 +237,8 @@ bool Sensor::getBoolData( DataName dname, uint8_t ch )
 		case LAST_STATE:
 			val = AN[ch].LastState;
 			break;
+		default:
+		break;
 	}
 
 	return val;
@@ -228,4 +253,27 @@ bool Sensor::getBoolData( DataName dname, uint8_t ch )
 uint16_t Sensor::LS_RAW( uint8_t ch )
 {
 	return analogRead(AN[ch].Pin);
+}
+
+/**
+ * @brief	Read sensors and yield result in Binary format.
+ * 			use this format to simplify user's code in interpreting
+ * 			sensor reading values.
+ * 
+ * @param	None
+ * @return	sensorVal, sensors detection in binary format
+*/
+uint16_t Sensor::LS_ScanBinary( void )
+{
+	uint16_t sensorVal = 0u;
+
+	for( uint8_t i = 0; i < NUM_SENSORS; i++ )
+	{
+		if( isLS_detected(i) == true )
+		{
+			sensorVal += (uint16_t)(pow(2, i) + 0.5);
+		}
+	}
+
+	return sensorVal;
 }

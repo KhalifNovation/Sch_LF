@@ -84,7 +84,14 @@ void loop()
         }
     }
 
-    // Do robot work here..
+    // Print sensor reading in Binary format
+    uint16_t sensorArr = input.LS_ScanBinary();
+    Serial.print("Sensor reading = ");
+    Serial.print("Binary: ");
+    Serial.print( sensorArr, BIN );
+    Serial.print("  |  Decimal: ");
+    Serial.print( sensorArr, DEC );
+    Serial.println();
 }
 
 // initialize Serial
