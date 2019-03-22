@@ -198,7 +198,7 @@ bool Sensor::isLS_detected( uint8_t ch )
 
 uint16_t Sensor::getIntData( DataName dname, uint8_t ch )
 {
-	uint16_t val;
+	uint16_t val = 0u;
 	switch( dname )
 	{
 		case PIN:
@@ -219,6 +219,8 @@ uint16_t Sensor::getIntData( DataName dname, uint8_t ch )
 		case THRESSHOLD:
 			val = AN[ch].ThressHold;
 			break;
+		default:
+		break;
 	}
 
 	return val;
@@ -226,7 +228,7 @@ uint16_t Sensor::getIntData( DataName dname, uint8_t ch )
 
 bool Sensor::getBoolData( DataName dname, uint8_t ch )
 {
-	bool val;
+	bool val = false;
 	switch( dname )
 	{
 		case STATE:
@@ -235,6 +237,8 @@ bool Sensor::getBoolData( DataName dname, uint8_t ch )
 		case LAST_STATE:
 			val = AN[ch].LastState;
 			break;
+		default:
+		break;
 	}
 
 	return val;
