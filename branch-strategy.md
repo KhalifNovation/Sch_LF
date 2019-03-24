@@ -105,17 +105,15 @@ This new branch may exist for a while. During this time, bug fixes may be applie
 ### Finishing a release branch
 
 Create PR for the release branch to be merged to master branch, the recommended way is doing this using Github GUI
-    * Go to the Github repository
-    * Select the new release branch
-    * Click "Compare & pull request" green button on the top right
-    * Leave comment and attach files/images if any, to state the new features
+* Go to the Github repository
+* Select the new release branch
+* Click "Compare & pull request" green button on the top right
+* Leave comment and attach files/images if any, to state the new features
 
 Finally, the changes made on the release branch need to be merged back into develop, so that future releses also contain these bug fixes.
 
-	```
 	$ git checkout develop
 	$ git merge --no-ff release-v1.0.1
-	```
 
 Release branch must not be delete. So that user has the option to download old release if new release got problems.
 
