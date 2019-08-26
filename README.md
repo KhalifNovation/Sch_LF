@@ -26,3 +26,7 @@ Getting started easier in basic robotic for primary and high school. This is a g
 ### Schematic
 
 ![](images/Sch_LF_pinout.JPG)
+
+### SCH_LF
+
+![](images/SCH_LF_Robot.jpeg)
