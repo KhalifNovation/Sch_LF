@@ -1,127 +1,93 @@
-/*
-	KhalifNovation
-	Sensor CPP File
-
-	Created :	12/02/2019 21:46:35
-	Author :     Syed Uthman
-	Hardware Target : KhalifTech Sch_LF (Arduino Nano Compatible Board)
-
-*/
-
 #include "Sensor.h"
 
+Sensor::Sensor()
+{
+}
 
-
-int channel[] = {
-		LS_0,
-		LS_1,
-		LS_2,
-		LS_3,
-		LS_4,
-		LS_5,
-		LS_6
-};
-
-void Sensor::begin(){
-	init_LS();
-	for (int i = 0; i < NUM_SENSORS; i++) {
-		AN[i].Pin = channel[i];
+void Sensor::begin(PinLF mySchLF, SensorData *IR)
+{
+	// sensorSize = sizeof(IR) / sizeof(SensorData);
+	pIR = IR;
+	for (int i = 0; i < sensorSize; i++)
+	{
+		pIR[i].Pin = mySchLF.IR[i];
 	}
 }
 
-void Sensor::calibration(int cycle = 30) {
-	int _val[ NUM_SENSORS ];
-	int	_pin[ NUM_SENSORS ];
-	int	_highval[ NUM_SENSORS ];
-	int	_lowval[ NUM_SENSORS ];
+void Sensor::calibration(int cycle = 30)
+{
+	int _val[sensorSize];
+	int _pin[sensorSize];
+	int _highval[sensorSize];
+	int _lowval[sensorSize];
 
-	for (int i = 0; i < NUM_SENSORS; i++) {
-		_val[i] = AN[i].Val;
-		_pin[i] = AN[i].Pin;
+	for (int i = 0; i < sensorSize; i++)
+	{
+		_val[i] = pIR[i].Val;
+		_pin[i] = pIR[i].Pin;
 	}
 
-	for (int n = 0; n < cycle; n++) {
-		for (int i = 0; i < NUM_SENSORS; i++) {
+	for (int n = 0; n < cycle; n++)
+	{
+		for (int i = 0; i < sensorSize; i++)
+		{
 			_val[i] = analogRead(_pin[i]);
 
-			if (_val[i] < _highval[i]) {
+			if (_val[i] < _highval[i])
+			{
 				_highval[i] = _val[i];
 			}
 
-			if (_val[i] > _lowval[i]) {
+			if (_val[i] > _lowval[i])
+			{
 				_lowval[i] = _val[i];
 			}
-
 		}
 		delay(20);
 	}
 
-
-
-	for (int i = 0; i < NUM_SENSORS; i++) {
+	for (int i = 0; i < sensorSize; i++)
+	{
 		int thress = _highval[i] - _lowval[i];
 		thress /= 2;
 
-		AN[i].ThressHold = thress;
-		AN[i].HighVal = _highval[i];
-		AN[i].LowVal  = _lowval[i];
+		pIR[i].ThressHold = thress;
+		pIR[i].HighVal = _highval[i];
+		pIR[i].LowVal = _lowval[i];
 	}
-
 }
 
-bool Sensor::isBTN_press() {
-	return !digitalRead(BTN);
-}
-
-bool Sensor::isJMP_connected() {
-	return !digitalRead(JMP);
-}
-
-bool Sensor::isLS_detected(int ch) {
-	return digitalRead(AN[ch].Pin);
-}
-
-int Sensor::getIntData(DataName dname, int ch) {
-	int val;
-	switch (dname) {
-	case PIN:
-		val = AN[ch].Pin;
-		break;
-	case VAL:
-		val = AN[ch].State;
-		break;
-	case HIGH_VAL:
-		val = AN[ch].Pin;
-		break;
-	case LOW_VAL:
-		val = AN[ch].State;
-		break;
-	case THRESSHOLD:
-		val = AN[ch].ThressHold;
-
-	}
-
-	return val;
-}
-
-bool Sensor::getBoolData(DataName dname, int ch) {
-	
-	bool val;
-
-	switch (dname)
+bool Sensor::scan(unsigned long period)
+{
+	unsigned long nMillis = millis();
+	if (nMillis - pMillis > period)
 	{
-	case STATE:
-		val = AN[ch].State;
-		break;
-	case LAST_STATE:
-		val = AN[ch].LastState;
-		break;
-	}
 
-	return val;
+		for (int i = 0; i < sensorSize; i++)
+		{
+			pIR[i].Val = LS_RAW(i);
+		}
+
+		pMillis = nMillis;
+		return 1;
+	}
+	return 0;
+}
+
+void Sensor::printScan()
+{
+	for (int i = 0; i < sensorSize; i++)
+	{
+		Serial.print(pIR[i].Val);
+		if (i < sensorSize - 1)
+			Serial.print(" : ");
+		else
+			Serial.println("\n");
+	}
+	
 }
 
 int Sensor::LS_RAW(int ch)
 {
-	return analogRead(AN[ch].Pin);
+	return analogRead(pIR[ch].Pin);
 }
