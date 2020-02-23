@@ -25,12 +25,12 @@ private:
 public:
     SchLF();
     SchLF(int *motorPin, int *irSensorPin, int buzzerPin, int jumperPin, int buttonPin);
-    void begin(PinLF mySchLF, SensorData *IR);
-    void begin(void);
+    void begin(PinLF mySchLF, SensorData *IR, bool invertL, bool invertR);
+    void begin(bool invertL, bool invertR);
 
     void buzzer(String mode);
 
-    bool button() {return digitalRead(_buttonPin);};
+    bool isButtonPress() {return !digitalRead(_buttonPin);};
 
     bool jumper() {return digitalRead(_jumperPin);};
 
@@ -42,7 +42,9 @@ public:
     // void drive(double heading, int speed, int gain);
 
     bool scan(unsigned long period = 30);
-    void printScan();
+    void calibration();
+    void printRaw();
+    void printBool();
 
     void stop();
 

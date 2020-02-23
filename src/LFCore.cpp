@@ -18,7 +18,7 @@ SchLF::SchLF(int *motorPin, int *irSensorPin, int buzzerPin, int jumperPin, int 
     _buttonPin = buttonPin;
 }
 
-void SchLF::begin(PinLF mySchLF, SensorData *IR)
+void SchLF::begin(PinLF mySchLF, SensorData *IR, bool invertL, bool invertR)
 {
     int myMotorPin[6] = {
         mySchLF.L_In1,
@@ -44,10 +44,10 @@ void SchLF::begin(PinLF mySchLF, SensorData *IR)
     _jumperPin = mySchLF.Jumper;
 
     LFsensor.begin(mySchLF,IR);
-    begin();
+    begin(invertL, invertR);
 }
 
-void SchLF::begin()
+void SchLF::begin(bool invertL, bool invertR)
 {
     for (int i = 0; i < motorPinSize; i++)
     {
@@ -56,19 +56,14 @@ void SchLF::begin()
     }
 
     pinMode(_buzzerPin, OUTPUT);
-    pinMode(_buttonPin, OUTPUT);
+    pinMode(_buttonPin, INPUT_PULLUP);
     pinMode(_jumperPin, OUTPUT);
-    LFmotor.begin(_motorPin);
+    LFmotor.begin(_motorPin,invertL,invertR);
     
 }
 
 void SchLF::buzzer(String mode)
 {
-    unsigned long iWhile = 0;
-    unsigned long pMillis = 0;
-    unsigned long pFlipMillis = 0;
-    pMillis = millis();
-    bool loopState = 1;
     if (mode.equals("ON"))
     {
         digitalWrite(_buzzerPin, HIGH);
@@ -105,12 +100,20 @@ void SchLF::turnRight(int speed)
     LFmotor.turnRight(motorSpeed);
 }
 
+void SchLF::calibration(){
+    LFsensor.calibration();
+}
+
 bool SchLF::scan(unsigned long period){
     return LFsensor.scan(period);
 }
 
-void SchLF::printScan(){
-    LFsensor.printScan();;
+void SchLF::printRaw(){
+    LFsensor.printRaw();;
+}
+
+void SchLF::printBool(){
+    LFsensor.printBool();;
 }
 
 
