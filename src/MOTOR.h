@@ -31,7 +31,7 @@ public:
 	MOTOR(int *pin, bool DirL=true, bool DirR=true);
 	MOTOR(bool DirL=true, bool DirR=true);
 	void begin(void);
-	void begin(int *pin);
+	void begin(int *pin,bool DirL=true, bool DirR=true);
 
 	void forward(int speed);
 	void backward(int speed);

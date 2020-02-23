@@ -33,7 +33,7 @@ void MOTOR::begin()
 	}
 }
 
-void MOTOR::begin(int *pin)
+void MOTOR::begin(int *pin,bool DirL, bool DirR)
 {
 	int i = 0;
 	P_LeftA = pin[i];
@@ -49,6 +49,9 @@ void MOTOR::begin(int *pin)
 	P_RightSpeed = pin[i];
 	i++;
 	ArraySize = i;
+	
+	DirL_C = DirL;
+	DirR_C = DirR;
 }
 
 void MOTOR::forward(int speed)
@@ -68,15 +71,15 @@ void MOTOR::backward(int speed)
 
 void MOTOR::turnLeft(int speed)
 {
-	motor_left(speed);
-	motor_right(-speed);
+	motor_left(-speed);
+	motor_right(speed);
 	run();
 }
 
 void MOTOR::turnRight(int speed)
 {
-	motor_left(-speed);
-	motor_right(speed);
+	motor_left(speed);
+	motor_right(-speed);
 	run();
 }
 
