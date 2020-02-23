@@ -1,5 +1,5 @@
 #include "SensorData.h"
 
-SensorData mySensorData[7];
+SensorData mySensorData;
 SchLF robot;
 PinLF myPin;

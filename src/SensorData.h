@@ -1,7 +1,7 @@
 #ifndef SENDATA
 #define SENDATA
 
-struct SensorData
+struct _SensorData
 {
 	int Pin;
 	bool State = false;
@@ -10,6 +10,10 @@ struct SensorData
 	int HighVal;
 	int LowVal;
 	int ThressHold;
+};
+
+struct SensorData{
+	_SensorData IR[7];
 };
 
 #endif

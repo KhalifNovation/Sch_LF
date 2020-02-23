@@ -19,10 +19,11 @@ public:
 	Sensor();
 
 	void begin(PinLF mySchLF, SensorData *IR);
-	void calibration(int cycle = 30);
+	void calibration(int cycle = 100);
 	
 	bool scan(unsigned long period);
-	void printScan();
+	void printRaw();
+	void printBool();
 		
 	int LS_RAW(int ch);
 
