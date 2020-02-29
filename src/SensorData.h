@@ -15,6 +15,8 @@ struct _SensorData
 struct SensorData{
 	_SensorData IR[7];
 	uint8_t state;
+	uint8_t prevState;
+	uint8_t pos;
 };
 
 #endif

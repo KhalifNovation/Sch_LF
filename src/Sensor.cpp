@@ -58,7 +58,8 @@ void Sensor::calibration(int cycle)
 	}
 
 	Serial.println("ThressHold");
-	for(int i = 0; i < sensorSize; i++){
+	for (int i = 0; i < sensorSize; i++)
+	{
 		Serial.print(pIR->IR[i].ThressHold);
 		if (i < sensorSize - 1)
 			Serial.print(" : ");
@@ -67,7 +68,8 @@ void Sensor::calibration(int cycle)
 	}
 
 	Serial.println("HighVal");
-	for(int i = 0; i < sensorSize; i++){
+	for (int i = 0; i < sensorSize; i++)
+	{
 		Serial.print(pIR->IR[i].HighVal);
 		if (i < sensorSize - 1)
 			Serial.print(" : ");
@@ -76,14 +78,14 @@ void Sensor::calibration(int cycle)
 	}
 
 	Serial.println("LowVal");
-	for(int i = 0; i < sensorSize; i++){
+	for (int i = 0; i < sensorSize; i++)
+	{
 		Serial.print(pIR->IR[i].LowVal);
 		if (i < sensorSize - 1)
 			Serial.print(" : ");
 		else
 			Serial.println("\n");
 	}
-
 }
 
 bool Sensor::scan(unsigned long period)
@@ -96,10 +98,69 @@ bool Sensor::scan(unsigned long period)
 		{
 			pIR->IR[i].Val = LS_RAW(i);
 			pIR->IR[i].State = pIR->IR[i].Val > pIR->IR[i].ThressHold ? true : false;
-			pIR->state |=  (uint8_t)pIR->IR[i].State << (6 - i);
+			pIR->state |= (uint8_t)pIR->IR[i].State << (6 - i);
 		}
 		pMillis = nMillis;
-		return 1;
+
+		if (pIR->state != pIR->prevState)
+		{
+			pIR->prevState = pIR->state;
+
+			if (pIR->state == 0b00000000)
+			{
+				pIR->pos = 0;
+			}
+			else if (pIR->state == 0b01000000)
+			{
+				pIR->pos = 1;
+			}
+			else if (pIR->state == 0b01100000)
+			{
+				pIR->pos = 2;
+			}
+			else if (pIR->state == 0b00100000)
+			{
+				pIR->pos = 3;
+			}
+			else if (pIR->state == 0b00110000)
+			{
+				pIR->pos = 4;
+			}
+			else if (pIR->state == 0b00010000)
+			{
+				pIR->pos = 5;
+			}
+			else if (pIR->state == 0b00011000)
+			{
+				pIR->pos = 6;
+			}
+			else if (pIR->state == 0b00001100)
+			{
+				pIR->pos = 7;
+			}
+			else if (pIR->state == 0b00000100)
+			{
+				pIR->pos = 8;
+			}
+			else if (pIR->state == 0b00000110)
+			{
+				pIR->pos = 9;
+			}
+			else if (pIR->state == 0b00000010)
+			{
+				pIR->pos = 10;
+			}
+			else if (pIR->state == 0b00000011)
+			{
+				pIR->pos = 11;
+			}
+			else if (pIR->state == 0b00000001)
+			{
+				pIR->pos = 12;
+			}
+			
+			return 1;
+		}
 	}
 	return 0;
 }
@@ -116,7 +177,8 @@ void Sensor::printRaw()
 	}
 }
 
-void Sensor::printBool(){
+void Sensor::printBool()
+{
 	for (int i = 0; i < sensorSize; i++)
 	{
 		Serial.print(pIR->IR[i].State);
