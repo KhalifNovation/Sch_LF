@@ -12,7 +12,9 @@ void loop()
     
     if (robot.scan())
     {
-        int error =mySensorData.pos - 6;
+        int error = mySensorData.pos - 6;
         Serial.println(error);
+        Serial.print("Flag Left = ");
+        Serial.println(mySensorData.flagLeft);
     }
 }
