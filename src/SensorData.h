@@ -17,6 +17,8 @@ struct SensorData{
 	uint8_t state;
 	uint8_t prevState;
 	uint8_t pos;
+	uint8_t prevPos;
+	bool flagLeft;
 };
 
 #endif

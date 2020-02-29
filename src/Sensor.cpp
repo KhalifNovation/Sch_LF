@@ -158,8 +158,20 @@ bool Sensor::scan(unsigned long period)
 			{
 				pIR->pos = 12;
 			}
-			
-			return 1;
+
+			if (pos != 0)
+			{
+				if (pos < 7)
+					pIR->flagLeft = true;
+
+				else
+					pIR->flagLeft = false;
+			}
+			if (pIR->prevPos != pIR->pos)
+			{
+				pIR->prevPos = pIR->pos;
+				return 1;
+			}
 		}
 	}
 	return 0;
