@@ -159,9 +159,9 @@ bool Sensor::scan(unsigned long period)
 				pIR->pos = 12;
 			}
 
-			if (pos != 0)
+			if (pIR->pos != 0)
 			{
-				if (pos < 7)
+				if (pIR->pos < 7)
 					pIR->flagLeft = true;
 
 				else
