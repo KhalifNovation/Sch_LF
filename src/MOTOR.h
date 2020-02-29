@@ -34,6 +34,7 @@ public:
 	void begin(int *pin,bool DirL=true, bool DirR=true);
 
 	void forward(int speed);
+	void forward(int speedL, int speedR);
 	void backward(int speed);
 	void turnLeft(int speed);
 	void turnRight(int speed);

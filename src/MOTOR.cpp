@@ -62,6 +62,12 @@ void MOTOR::forward(int speed)
 	run();
 }
 
+void MOTOR::forward(int speedL, int speedR){
+	motor_left(speedL);
+	motor_right(speedR);
+	run();
+}
+
 void MOTOR::backward(int speed)
 {
 	motor_left(-speed);
