@@ -170,9 +170,10 @@ bool Sensor::scan(unsigned long period)
 			if (pIR->prevPos != pIR->pos)
 			{
 				pIR->prevPos = pIR->pos;
-				return 1;
+				
 			}
 		}
+		return 1;
 	}
 	return 0;
 }
