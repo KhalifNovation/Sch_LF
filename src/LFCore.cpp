@@ -77,27 +77,27 @@ void SchLF::buzzer(String mode)
 
 void SchLF::forward(int speed)
 {
-    double motorSpeed = 2.55 * speed;
-    LFmotor.forward(motorSpeed);
+    LFmotor.forward(speed);
+}
+
+void SchLF::forward(int speedL,int speedR)
+{
+    LFmotor.forward(speedL,speedR);
 }
 
 void SchLF::backward(int speed)
 {
-    double motorSpeed = 2.55 * speed;
-
-    LFmotor.backward(motorSpeed);
+    LFmotor.backward(speed);
 }
 
 void SchLF::turnLeft(int speed)
 {
-    double motorSpeed = 2.55 * speed;
-    LFmotor.turnLeft(motorSpeed);
+    LFmotor.turnLeft(speed);
 }
 
 void SchLF::turnRight(int speed)
 {
-    double motorSpeed = 2.55 * speed;
-    LFmotor.turnRight(motorSpeed);
+    LFmotor.turnRight(speed);
 }
 
 void SchLF::calibration(){

@@ -35,6 +35,7 @@ public:
     bool jumper() {return digitalRead(_jumperPin);};
 
     void forward(int speed);
+    void forward(int speedL, int speedR);
     void backward(int speed);
     void turnLeft(int speed);
     void turnRight(int speed);
