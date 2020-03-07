@@ -98,7 +98,15 @@ bool Sensor::scan(unsigned long period)
 		{
 			pIR->IR[i].Val = LS_RAW(i);
 			pIR->IR[i].State = pIR->IR[i].Val > pIR->IR[i].ThressHold ? true : false;
+			if(i == 6){
+				pIR->state |= 0;
+			}
+			else
+			{
 			pIR->state |= (uint8_t)pIR->IR[i].State << (6 - i);
+			}
+			
+
 		}
 		pMillis = nMillis;
 
